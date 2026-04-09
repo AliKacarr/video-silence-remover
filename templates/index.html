@@ -2564,8 +2564,8 @@
                 }
               } else {
                 progressBlock.classList.remove("soft-phase");
-                progressFill.classList.add("indeterminate");
-                progressFill.style.width = "";
+                progressFill.classList.remove("indeterminate");
+                progressFill.style.width = displayedProgressPercent + "%";
                 progressLine1.textContent = "İşleniyor…";
                 progressPercentLabelActive = false;
                 progressLine2.textContent = pickProgressMessage(st.message, "Adımlar işleniyor...");
@@ -2659,7 +2659,4 @@
     })();
   </script>
 </body>
-
-</html>
-
 </html>
