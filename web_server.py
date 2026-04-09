@@ -331,6 +331,15 @@ def template_background_webp():
         str(tf), "background.webp", mimetype="image/webp"
     )
 
+@app.route("/app-logo.png")
+def template_app_logo_png():
+    """templates/app-logo.png — favicon görseli."""
+    tf = Path(app.root_path) / (app.template_folder or "templates")
+    if not (tf / "app-logo.png").is_file():
+        abort(404)
+    return send_from_directory(
+        str(tf), "app-logo.png", mimetype="image/png"
+    )
 
 @app.route("/hakkimizda.html")
 def page_hakkimizda():

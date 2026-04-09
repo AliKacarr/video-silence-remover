@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Video Sessizlik Kaldırıcı</title>
+  <link rel="icon" type="image/png" href="/app-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     :root {
       --bg: #eef0f5;
@@ -35,8 +38,15 @@
       --progress-track: #e5e7eb;
     }
 
-    * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
 
     html {
       background: var(--bg);
@@ -53,20 +63,16 @@
         radial-gradient(ellipse 90% 85% at 0% 48%, rgba(29, 78, 216, 0.09), transparent 58%),
         radial-gradient(ellipse 90% 85% at 100% 52%, rgba(29, 78, 216, 0.08), transparent 58%),
         radial-gradient(ellipse 100% 65% at 50% -5%, rgba(255, 255, 255, 0.72), transparent 48%),
-        repeating-linear-gradient(
-          0deg,
+        repeating-linear-gradient(0deg,
           transparent,
           transparent 31px,
           rgba(17, 24, 39, 0.022) 31px,
-          rgba(17, 24, 39, 0.022) 32px
-        ),
-        repeating-linear-gradient(
-          90deg,
+          rgba(17, 24, 39, 0.022) 32px),
+        repeating-linear-gradient(90deg,
           transparent,
           transparent 31px,
           rgba(17, 24, 39, 0.022) 31px,
-          rgba(17, 24, 39, 0.022) 32px
-        );
+          rgba(17, 24, 39, 0.022) 32px);
       background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat;
       line-height: 1.55;
       -webkit-font-smoothing: antialiased;
@@ -92,7 +98,9 @@
       flex-direction: column;
     }
 
-    main { flex: 1; }
+    main {
+      flex: 1;
+    }
 
     h1.page-title {
       font-size: 36px;
@@ -240,7 +248,7 @@
     }
 
     .drop-cta-icon svg {
-      width:  18px;
+      width: 18px;
       height: 18px;
       stroke: #fff;
       stroke-width: 2.5;
@@ -263,7 +271,13 @@
       line-height: 1.45;
     }
 
-    input[type="file"] { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; }
+    input[type="file"] {
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
 
     .body-pad {
       box-sizing: border-box;
@@ -482,13 +496,16 @@
       .video-info-card .video-info-side {
         align-items: stretch;
       }
+
       .video-info-thumb {
         width: 100%;
         max-width: none;
       }
+
       .video-info-side {
         padding-top: 0;
       }
+
       .video-info-actions {
         width: 100%;
         justify-content: space-between;
@@ -552,7 +569,9 @@
       height: 15px;
     }
 
-    .chevron svg { stroke: var(--text); }
+    .chevron svg {
+      stroke: var(--text);
+    }
 
     .advanced-wrap {
       margin-bottom: 0;
@@ -577,7 +596,9 @@
       color: var(--text);
     }
 
-    .advanced-toggle:hover { background: var(--toggle-hover); }
+    .advanced-toggle:hover {
+      background: var(--toggle-hover);
+    }
 
     .advanced-label {
       font-weight: 600;
@@ -596,7 +617,9 @@
         border-color 0.2s ease;
     }
 
-    .advanced-wrap.open .chevron { transform: rotate(180deg); }
+    .advanced-wrap.open .chevron {
+      transform: rotate(180deg);
+    }
 
     .panel.is-processing .advanced-wrap {
       opacity: 0.55;
@@ -724,7 +747,9 @@
     }
 
     @media (min-width: 520px) {
-      .fields { grid-template-columns: 1fr 1fr; }
+      .fields {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     label.field {
@@ -799,8 +824,15 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.14),
         0 6px 20px rgba(29, 78, 216, 0.42);
     }
-    .btn-primary:active:not(:disabled) { transform: scale(0.99); }
-    .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    .btn-primary:active:not(:disabled) {
+      transform: scale(0.99);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
 
     .btn-primary[hidden] {
       display: none !important;
@@ -826,8 +858,14 @@
       border-color: var(--muted);
     }
 
-    .btn-reprocess:active:not(:disabled) { transform: scale(0.99); }
-    .btn-reprocess:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-reprocess:active:not(:disabled) {
+      transform: scale(0.99);
+    }
+
+    .btn-reprocess:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
 
     .btn-reprocess[hidden] {
       display: none !important;
@@ -838,7 +876,9 @@
       margin: 0;
     }
 
-    .progress-block.active { display: block; }
+    .progress-block.active {
+      display: block;
+    }
 
     .progress-top {
       display: flex;
@@ -883,8 +923,14 @@
       display: none !important;
     }
 
-    .progress-label { color: var(--text); }
-    .progress-value { font-weight: 600; color: var(--text); }
+    .progress-label {
+      color: var(--text);
+    }
+
+    .progress-value {
+      font-weight: 600;
+      color: var(--text);
+    }
 
     .progress-block.soft-phase .progress-heading {
       flex-direction: column;
@@ -923,12 +969,10 @@
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: linear-gradient(
-        110deg,
-        rgba(255, 255, 255, 0) 12%,
-        rgba(255, 255, 255, 0.34) 42%,
-        rgba(255, 255, 255, 0) 72%
-      );
+      background: linear-gradient(110deg,
+          rgba(255, 255, 255, 0) 12%,
+          rgba(255, 255, 255, 0.34) 42%,
+          rgba(255, 255, 255, 0) 72%);
       transform: translateX(-130%);
       opacity: 0;
       pointer-events: none;
@@ -945,13 +989,23 @@
     }
 
     @keyframes indet {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(350%); }
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(350%);
+      }
     }
 
     @keyframes progress-sheen {
-      0% { transform: translateX(-130%); }
-      100% { transform: translateX(130%); }
+      0% {
+        transform: translateX(-130%);
+      }
+
+      100% {
+        transform: translateX(130%);
+      }
     }
 
     .error-box {
@@ -969,14 +1023,18 @@
       overflow: auto;
     }
 
-    .error-box.show { display: block; }
+    .error-box.show {
+      display: block;
+    }
 
     .download-wrap {
       display: none;
       margin: 0;
     }
 
-    .download-wrap.show { display: block; }
+    .download-wrap.show {
+      display: block;
+    }
 
     .download-success {
       margin-bottom: 18px;
@@ -1105,10 +1163,12 @@
       .compare-videos {
         grid-template-columns: 1fr;
       }
+
       .compare-mid {
         display: none;
       }
-      .compare-col.compare-col--hidden ~ .compare-mid {
+
+      .compare-col.compare-col--hidden~.compare-mid {
         display: none;
       }
     }
@@ -1280,15 +1340,16 @@
       font-size: 18px;
       line-height: 1;
     }
-
   </style>
 </head>
+
 <body>
   <div class="page">
     <main>
       <h1 class="page-title">
         <span class="page-title-icons" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5.42 9.42 8 12" />
             <circle cx="4" cy="8" r="2" />
             <path d="m14 6-8.58 8.58" />
@@ -1297,7 +1358,8 @@
             <path d="M16 12h-2" />
             <path d="M22 12h-2" />
           </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M2 10v3" />
             <path d="M6 6v11" />
             <path d="M10 3v18" />
@@ -1309,7 +1371,8 @@
         Sessizlik Kaldırıcı
       </h1>
       <p class="subtitle">
-        Videolarınızdaki sessiz anları otomatik tespit edip saniyeler içinde temizleyin. Dosyanızı yükleyin ve daha akıcı hale gelmiş videonuzu ücretsiz olarak indirin.
+        Videolarınızdaki sessiz anları otomatik tespit edip saniyeler içinde temizleyin. Dosyanızı yükleyin ve daha
+        akıcı hale gelmiş videonuzu ücretsiz olarak indirin.
       </p>
 
       <div class="panel" id="mainPanel">
@@ -1330,82 +1393,98 @@
 
         <div class="body-pad">
           <div class="after-video-pick" id="afterVideoPick">
-          <div class="video-info-card" id="videoInfoCard" aria-live="polite">
-            <div class="video-info-thumb" id="videoInfoThumb">
-              <video id="videoPreview" muted playsinline preload="metadata" aria-hidden="true"></video>
-              <button type="button" class="video-thumb-play" id="btnThumbPlay" hidden aria-label="Önizlemeyi oynat">
-                <span class="video-thumb-play-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z" /></svg>
+            <div class="video-info-card" id="videoInfoCard" aria-live="polite">
+              <div class="video-info-thumb" id="videoInfoThumb">
+                <video id="videoPreview" muted playsinline preload="metadata" aria-hidden="true"></video>
+                <button type="button" class="video-thumb-play" id="btnThumbPlay" hidden aria-label="Önizlemeyi oynat">
+                  <span class="video-thumb-play-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </span>
+                </button>
+              </div>
+              <div class="video-info-side">
+                <div class="video-info-main">
+                  <div class="video-info-name" id="videoCardName"></div>
+                  <div class="video-info-meta">
+                    <span id="videoCardSize"></span><span class="video-info-dot">·</span><span
+                      id="videoCardDuration">—</span>
+                  </div>
+                </div>
+                <div class="video-info-actions" id="videoFileActions">
+                  <button type="button" class="btn-change-video" id="btnChangeVideo"
+                    title="Başka video seçin; pencerede İptal derseniz mevcut video kalır">
+                    <span class="btn-change-video-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M23 4v6h-6" />
+                        <path d="M1 20v-6h6" />
+                        <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
+                      </svg>
+                    </span>
+                    <span>Videoyu değiştir</span>
+                  </button>
+                  <button type="button" class="btn-remove-video" id="btnRemoveVideo" title="Videoyu kaldır"
+                    aria-label="Videoyu kaldır">
+                    <span class="btn-remove-video-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4h8v2" />
+                        <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6" />
+                        <path d="M10 11v6M14 11v6" />
+                      </svg>
+                    </span>
+                    <span>Videoyu kaldır</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="advanced-wrap" id="advancedWrap">
+              <button type="button" class="advanced-toggle" id="advancedToggle" aria-expanded="false"
+                aria-controls="advancedBody">
+                <span class="advanced-label">Gelişmiş ayarlar</span>
+                <span class="chevron" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
                 </span>
               </button>
-            </div>
-            <div class="video-info-side">
-              <div class="video-info-main">
-                <div class="video-info-name" id="videoCardName"></div>
-                <div class="video-info-meta">
-                  <span id="videoCardSize"></span><span class="video-info-dot">·</span><span id="videoCardDuration">—</span>
+              <div class="advanced-body" id="advancedBody">
+                <div class="advanced-body-inner">
+                  <div class="fields">
+                    <label class="field">
+                      <span class="field-label">Sessizlik Eşiği (desibel)</span>
+                      <span class="field-desc">Bu seviyenin altındaki sesler silinir. Daha fazla alanı kesmek için
+                        -25'i, daha az alanı kesmek için -45'i deneyin.</span>
+                      <input type="text" name="threshold_level" id="thresholdLevelInput" placeholder="-35"
+                        data-default="-35" data-min="-70" data-max="0" autocomplete="off" spellcheck="false"
+                        inputmode="numeric" />
+                    </label>
+                    <label class="field">
+                      <span class="field-label">Minimum Sessizlik Süresi (saniye)</span>
+                      <span class="field-desc">Sadece bu süreden uzun boşluklar silinir. Doğal konuşma akışını ve nefes
+                        payını korumak için süreyi artırın.</span>
+                      <input type="text" name="threshold_duration" id="thresholdDurationInput" placeholder="0,6"
+                        data-default="0.6" autocomplete="off" spellcheck="false" inputmode="decimal" />
+                    </label>
+                  </div>
+                  <div class="advanced-footer">
+                    <button type="button" class="btn-reprocess" id="btnReprocess" hidden
+                      title="Çalışan işi iptal edip bu ayarlarla yeniden işler">
+                      Yeni Ayarlarla Kes
+                    </button>
+                    <button type="button" class="btn-advanced-reset" id="btnAdvancedReset"
+                      aria-label="Varsayılan değerlere sıfırla"
+                      title="Bu iki alanı program varsayılanlarına döndürür">Varsayılanlara Dön</button>
+                  </div>
                 </div>
               </div>
-              <div class="video-info-actions" id="videoFileActions">
-                <button type="button" class="btn-change-video" id="btnChangeVideo" title="Başka video seçin; pencerede İptal derseniz mevcut video kalır">
-                  <span class="btn-change-video-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M23 4v6h-6" />
-                      <path d="M1 20v-6h6" />
-                      <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
-                    </svg>
-                  </span>
-                  <span>Videoyu değiştir</span>
-                </button>
-                <button type="button" class="btn-remove-video" id="btnRemoveVideo" title="Videoyu kaldır" aria-label="Videoyu kaldır">
-                  <span class="btn-remove-video-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M3 6h18" />
-                      <path d="M8 6V4h8v2" />
-                      <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6" />
-                      <path d="M10 11v6M14 11v6" />
-                    </svg>
-                  </span>
-                  <span>Videoyu kaldır</span>
-                </button>
-              </div>
             </div>
-          </div>
 
-          <div class="advanced-wrap" id="advancedWrap">
-            <button type="button" class="advanced-toggle" id="advancedToggle" aria-expanded="false" aria-controls="advancedBody">
-              <span class="advanced-label">Gelişmiş ayarlar</span>
-              <span class="chevron" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M6 9l6 6 6-6" />
-                </svg>
-              </span>
-            </button>
-            <div class="advanced-body" id="advancedBody">
-              <div class="advanced-body-inner">
-                <div class="fields">
-                  <label class="field">
-                    <span class="field-label">Sessizlik Eşiği (desibel)</span>
-                    <span class="field-desc">Bu seviyenin altındaki sesler silinir. Daha fazla alanı kesmek için -25'i, daha az alanı kesmek için -45'i deneyin.</span>
-                    <input type="text" name="threshold_level" id="thresholdLevelInput" placeholder="-35" data-default="-35" data-min="-70" data-max="0" autocomplete="off" spellcheck="false" inputmode="numeric" />
-                  </label>
-                  <label class="field">
-                    <span class="field-label">Minimum Sessizlik Süresi (saniye)</span>
-                    <span class="field-desc">Sadece bu süreden uzun boşluklar silinir. Doğal konuşma akışını ve nefes payını korumak için süreyi artırın.</span>
-                    <input type="text" name="threshold_duration" id="thresholdDurationInput" placeholder="0,6" data-default="0.6" autocomplete="off" spellcheck="false" inputmode="decimal" />
-                  </label>
-                </div>
-                <div class="advanced-footer">
-                  <button type="button" class="btn-reprocess" id="btnReprocess" hidden title="Çalışan işi iptal edip bu ayarlarla yeniden işler">
-                    Yeni Ayarlarla Kes
-                  </button>
-                  <button type="button" class="btn-advanced-reset" id="btnAdvancedReset" aria-label="Varsayılan değerlere sıfırla" title="Bu iki alanı program varsayılanlarına döndürür">Varsayılanlara Dön</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <button type="button" class="btn-primary" id="btnProcess" disabled>✨ Sessizlikleri kaldır</button>
+            <button type="button" class="btn-primary" id="btnProcess" disabled>✨ Sessizlikleri kaldır</button>
           </div>
 
           <div class="progress-block" id="progressBlock">
@@ -1433,7 +1512,8 @@
                 <div class="compare-col" id="compareColIn">
                   <div class="compare-label-row">
                     <span class="compare-label">Orijinal</span>
-                    <span class="compare-label-duration" id="compareInDuration" aria-label="Orijinal video süresi"></span>
+                    <span class="compare-label-duration" id="compareInDuration"
+                      aria-label="Orijinal video süresi"></span>
                   </div>
                   <div class="compare-thumb">
                     <video id="compareVideoIn" controls playsinline preload="metadata"></video>
@@ -1454,7 +1534,10 @@
               </div>
             </div>
             <a class="btn-primary" id="downloadLink" href="#" download>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l4-4m-4 4l-4-4"/><path d="M4 21h16"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 3v12m0 0l4-4m-4 4l-4-4" />
+                <path d="M4 21h16" />
+              </svg>
               Videoyu indir
             </a>
             <p class="download-note" id="downloadNote"></p>
@@ -1465,65 +1548,76 @@
   </div>
 
   <footer class="site-footer">
-      <div class="site-footer__row">
-        <nav class="social-footer" aria-label="Sosyal medya ve bağlantılar">
-          <ul class="social-footer__list">
-            <li>
-              <a class="social-footer__link" href="https://www.youtube.com/@%C3%87at%C4%B1Kat%C4%B1-u7m" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                <span class="fa-brands fa-youtube" aria-hidden="true"></span>
-              </a>
-            </li>
-            <li>
-              <a class="social-footer__link" href="https://www.instagram.com/catikatimelazig" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <span class="fa-brands fa-instagram" aria-hidden="true"></span>
-              </a>
-            </li>
-            <li>
-              <a class="social-footer__link" href="https://x.com/catikatimelazig" target="_blank" rel="noopener noreferrer" aria-label="X">
-                <span class="fa-brands fa-x-twitter" aria-hidden="true"></span>
-              </a>
-            </li>
-            <li>
-              <a class="social-footer__link" href="https://www.facebook.com/catikatim" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <span class="fa-brands fa-facebook" aria-hidden="true"></span>
-              </a>
-            </li>
-            <li>
-              <a class="social-footer__link" href="https://open.spotify.com/show/1QIENVd5g588MS1eF1ZcKi?si=YjGkdeDLQkG0AYYCfcNbVg" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
-                <span class="fa-brands fa-spotify" aria-hidden="true"></span>
-              </a>
-            </li>
-            <li>
-              <a class="social-footer__link" href="https://www.tiktok.com/@kehf.studio" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                <span class="fa-brands fa-tiktok" aria-hidden="true"></span>
-              </a>
-            </li>
-            <li>
-              <a class="social-footer__link" href="https://play.google.com/store/apps/details?id=com.ateizmfikrinecevaplar&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="Google Play">
-                <span class="fa-brands fa-google-play" aria-hidden="true"></span>
-              </a>
-            </li>
-            <li>
-              <a class="social-footer__link" href="https://www.ateizmfikri.com/" target="_blank" rel="noopener noreferrer" aria-label="Web sitesi">
-                <span class="fa-solid fa-globe" aria-hidden="true"></span>
-              </a>
-            </li>
-            <li>
-              <a class="social-footer__link" href="https://github.com/AliKacarr" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <span class="fa-brands fa-github" aria-hidden="true"></span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <p class="footer-legal">Çatı Katı İlim ve Kültür Derneği © Tüm hakları saklıdır.</p>
-        <nav class="footer-meta-links" aria-label="Kurumsal bağlantılar">
-          <a href="hakkimizda.html">Hakkımızda</a>
-          <span class="footer-meta-sep" aria-hidden="true">·</span>
-          <a href="gizlilik-politikasi.html">Gizlilik politikası</a>
-          <span class="footer-meta-sep" aria-hidden="true">·</span>
-          <a href="cerez-politikasi.html">Çerez Politikası</a>
-        </nav>
-      </div>
+    <div class="site-footer__row">
+      <nav class="social-footer" aria-label="Sosyal medya ve bağlantılar">
+        <ul class="social-footer__list">
+          <li>
+            <a class="social-footer__link" href="https://www.youtube.com/@%C3%87at%C4%B1Kat%C4%B1-u7m" target="_blank"
+              rel="noopener noreferrer" aria-label="YouTube">
+              <span class="fa-brands fa-youtube" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li>
+            <a class="social-footer__link" href="https://www.instagram.com/catikatimelazig" target="_blank"
+              rel="noopener noreferrer" aria-label="Instagram">
+              <span class="fa-brands fa-instagram" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li>
+            <a class="social-footer__link" href="https://x.com/catikatimelazig" target="_blank"
+              rel="noopener noreferrer" aria-label="X">
+              <span class="fa-brands fa-x-twitter" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li>
+            <a class="social-footer__link" href="https://www.facebook.com/catikatim" target="_blank"
+              rel="noopener noreferrer" aria-label="Facebook">
+              <span class="fa-brands fa-facebook" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li>
+            <a class="social-footer__link"
+              href="https://open.spotify.com/show/1QIENVd5g588MS1eF1ZcKi?si=YjGkdeDLQkG0AYYCfcNbVg" target="_blank"
+              rel="noopener noreferrer" aria-label="Spotify">
+              <span class="fa-brands fa-spotify" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li>
+            <a class="social-footer__link" href="https://www.tiktok.com/@kehf.studio" target="_blank"
+              rel="noopener noreferrer" aria-label="TikTok">
+              <span class="fa-brands fa-tiktok" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li>
+            <a class="social-footer__link"
+              href="https://play.google.com/store/apps/details?id=com.ateizmfikrinecevaplar&pcampaignid=web_share"
+              target="_blank" rel="noopener noreferrer" aria-label="Google Play">
+              <span class="fa-brands fa-google-play" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li>
+            <a class="social-footer__link" href="https://www.ateizmfikri.com/" target="_blank" rel="noopener noreferrer"
+              aria-label="Web sitesi">
+              <span class="fa-solid fa-globe" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li>
+            <a class="social-footer__link" href="https://github.com/AliKacarr" target="_blank" rel="noopener noreferrer"
+              aria-label="GitHub">
+              <span class="fa-brands fa-github" aria-hidden="true"></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <p class="footer-legal">Çatı Katı İlim ve Kültür Derneği © Tüm hakları saklıdır.</p>
+      <nav class="footer-meta-links" aria-label="Kurumsal bağlantılar">
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <span class="footer-meta-sep" aria-hidden="true">·</span>
+        <a href="gizlilik-politikasi.html">Gizlilik politikası</a>
+        <span class="footer-meta-sep" aria-hidden="true">·</span>
+        <a href="cerez-politikasi.html">Çerez Politikası</a>
+      </nav>
+    </div>
   </footer>
 
   <script>
@@ -1608,7 +1702,7 @@
       function cancelAllEditingState() {
         if (currentJobId) {
           var jid = currentJobId;
-          fetch("/api/cancel/" + jid, { method: "POST" }).catch(function () {});
+          fetch("/api/cancel/" + jid, { method: "POST" }).catch(function () { });
         }
         cleanupJobUiLocal();
       }
@@ -1618,7 +1712,7 @@
         var jid = currentJobId;
         try {
           await fetch("/api/cancel/" + jid, { method: "POST" });
-        } catch (e) {}
+        } catch (e) { }
         cleanupJobUiLocal();
       }
 
@@ -1695,7 +1789,7 @@
             td.value = sanitizeThresholdDurationString(td.value);
             clampThresholdDuration(td);
           }
-        } catch (e) {}
+        } catch (e) { }
       }
 
       function saveAdvancedToStorage() {
@@ -1705,7 +1799,7 @@
             o[inp.name] = (inp.value || "").trim();
           });
           localStorage.setItem(ADV_STORAGE_KEY, JSON.stringify(o));
-        } catch (e) {}
+        } catch (e) { }
       }
 
       function scheduleSaveAdvanced() {
@@ -1729,7 +1823,7 @@
       var hadAdvancedStorage = false;
       try {
         hadAdvancedStorage = !!localStorage.getItem(ADV_STORAGE_KEY);
-      } catch (e) {}
+      } catch (e) { }
       loadAdvancedFromStorage();
       if (!hadAdvancedStorage) {
         resetAdvancedToDefaults();
@@ -2173,7 +2267,7 @@
           videoPreview.load();
           try {
             videoPreview.currentTime = 0;
-          } catch (e2) {}
+          } catch (e2) { }
         }
         if (prevBlobUrl) {
           URL.revokeObjectURL(prevBlobUrl);
@@ -2274,7 +2368,7 @@
           var jid = currentJobId;
           try {
             await fetch("/api/cancel/" + jid, { method: "POST" });
-          } catch (e) {}
+          } catch (e) { }
           if (pollTimer) {
             clearInterval(pollTimer);
             pollTimer = null;
@@ -2565,4 +2659,7 @@
     })();
   </script>
 </body>
+
+</html>
+
 </html>
