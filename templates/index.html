@@ -463,6 +463,16 @@
     }
 
     @media (max-width: 560px) {
+      .dropzone {
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+        padding: 20px 16px 22px;
+      }
+
+      .drop-secondary {
+        display: none;
+      }
+
       .video-info-card {
         flex-direction: column;
         align-items: stretch;
@@ -1118,7 +1128,7 @@
       margin-top: auto;
       padding: 20px max(20px, env(safe-area-inset-left)) 28px max(20px, env(safe-area-inset-right));
       border-top: 1px solid var(--focus-ring);
-      font-size: 0.8125rem;
+      font-size: 0.875rem;
       line-height: 1.5;
       color: var(--muted);
     }
@@ -1143,7 +1153,7 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: flex-start;
-      gap: 10px 12px;
+      gap: 10px 5px;
     }
 
     .footer-legal {
@@ -1267,7 +1277,7 @@
 
     .social-footer__link .fa-brands,
     .social-footer__link .fa-solid {
-      font-size: 1.35rem;
+      font-size: 18px;
       line-height: 1;
     }
 
@@ -1505,7 +1515,7 @@
             </li>
           </ul>
         </nav>
-        <p class="footer-legal">Çatı Katı Elazığ İlim ve Kültür Derneği © Tüm hakları saklıdır.</p>
+        <p class="footer-legal">Çatı Katı İlim ve Kültür Derneği © Tüm hakları saklıdır.</p>
         <nav class="footer-meta-links" aria-label="Kurumsal bağlantılar">
           <a href="hakkimizda.html">Hakkımızda</a>
           <span class="footer-meta-sep" aria-hidden="true">·</span>
