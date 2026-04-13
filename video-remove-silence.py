@@ -14,6 +14,28 @@ import wave
 
 import ffprobe
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def resolve_ffmpeg_binary():
+    name = 'ffmpeg.exe' if os.name == 'nt' else 'ffmpeg'
+    hit = ffprobe.which_media_tool_from_path("ffmpeg")
+    if hit:
+        return hit
+
+    candidates = [
+        os.path.join(BASE_DIR, 'ffmpeg', 'bin', name),
+        os.path.join(BASE_DIR, 'ffmpeg', name),
+    ]
+    for candidate in candidates:
+        if os.path.isfile(candidate):
+            return candidate
+    return "ffmpeg"
+
+
+FFMPEG_BIN = resolve_ffmpeg_binary()
+ffprobe.announce_ffmpeg_tool_resolution("ffmpeg", FFMPEG_BIN)
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('path', type=str, help='path to video')
@@ -145,7 +167,7 @@ def find_silences(filename):
     return silence_regions, including_end
 
 def extract_audio(input_filename, output_filename):
-    command = [ 'ffmpeg', '-i', input_filename, '-acodec', 'pcm_s16le', '-f', 'wav', '-y', output_filename ]
+    command = [ FFMPEG_BIN, '-i', input_filename, '-acodec', 'pcm_s16le', '-f', 'wav', '-y', output_filename ]
     subprocess.run(command, stderr=subprocess.PIPE).check_returncode()
 
 audio_file = tempfile.NamedTemporaryFile(delete=False)
@@ -230,12 +252,12 @@ if args.recalculate_time_in_description:
         description_file.write(description)
 
 print('Processing {} frames...'.format(frames))
-command = [ 'ffmpeg', '-i', args.path, '-f', 'image2pipe', '-pix_fmt', 'rgb24', '-vcodec', 'rawvideo', '-' ]
+command = [ FFMPEG_BIN, '-i', args.path, '-f', 'image2pipe', '-pix_fmt', 'rgb24', '-vcodec', 'rawvideo', '-' ]
 decoder = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
 
 video_track = tempfile.NamedTemporaryFile(delete=False)
 video_track.close()
-command = [ 'ffmpeg', '-framerate', str(frame_rate), '-s', '{}x{}'.format(width, height), '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-i', '-' ]
+command = [ FFMPEG_BIN, '-framerate', str(frame_rate), '-s', '{}x{}'.format(width, height), '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-i', '-' ]
 command += [ '-f', 'mp4', '-pix_fmt', 'yuv420p', '-y', video_track.name ]
 encoder = subprocess.Popen(command, stdin=subprocess.PIPE)
 
@@ -337,7 +359,7 @@ decoder.terminate()
 
 report_progress('merge', 0, 1, 'Son rötuşlar yapılıyor...')
 name, extension = os.path.splitext(args.path)
-command = [ 'ffmpeg', '-f', 'mp4', '-i', video_track.name, '-f', 'wav', '-i', audio_track.name ]
+command = [ FFMPEG_BIN, '-f', 'mp4', '-i', video_track.name, '-f', 'wav', '-i', audio_track.name ]
 command += [ '-c:v', 'copy', '-map', '0:v:0', '-map', '1:a:0', '-y', '{}_result{}'.format(name, extension) ]
 subprocess.run(command)
 report_progress('merge', 1, 1, 'Son rötuşlar yapılıyor...')

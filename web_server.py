@@ -13,17 +13,110 @@ import sys
 import threading
 import time
 import uuid
+import importlib
+from importlib import metadata
 from pathlib import Path
 from typing import Optional, Tuple
 
+MIN_FLASK_VERSION = (3, 1)
+
+
+def _parse_major_minor(version_text: str) -> Tuple[int, int]:
+    parts = (version_text or "").split(".")
+    try:
+        major = int(parts[0]) if len(parts) > 0 else 0
+        minor = int(parts[1]) if len(parts) > 1 else 0
+    except ValueError:
+        return (0, 0)
+    return (major, minor)
+
+
+def _has_supported_flask() -> bool:
+    try:
+        importlib.import_module("flask")
+        importlib.import_module("werkzeug")
+    except ModuleNotFoundError:
+        return False
+    try:
+        flask_version = metadata.version("flask")
+    except metadata.PackageNotFoundError:
+        return False
+    return _parse_major_minor(flask_version) >= MIN_FLASK_VERSION
+
+
+def _ensure_web_runtime_dependencies() -> None:
+    """Flask 3.1+ yoksa ilk çalıştırmada otomatik yükle/güncelle."""
+    if _has_supported_flask():
+        return
+
+    req_file = Path(__file__).resolve().parent / "requirements-web.txt"
+    minv = ".".join(str(x) for x in MIN_FLASK_VERSION)
+    print(
+        f"Flask {minv}+ bulunamadı (veya eski), web bağımlılıkları otomatik kuruluyor...",
+        flush=True,
+    )
+    if req_file.is_file():
+        cmd = [
+            sys.executable,
+            "-m",
+            "pip",
+            "install",
+            "--disable-pip-version-check",
+            "-r",
+            str(req_file),
+        ]
+    else:
+        cmd = [
+            sys.executable,
+            "-m",
+            "pip",
+            "install",
+            "--disable-pip-version-check",
+            f"flask>={minv}.0",
+        ]
+    try:
+        subprocess.check_call(cmd)
+    except subprocess.CalledProcessError as exc:
+        raise RuntimeError(
+            "Web bağımlılıkları otomatik kurulamadı. "
+            "İnternet bağlantısını kontrol edip tekrar deneyin."
+        ) from exc
+
+
+_ensure_web_runtime_dependencies()
+
 from flask import Flask, abort, jsonify, render_template, request, send_file, send_from_directory
+from werkzeug.exceptions import RequestEntityTooLarge
 
 import ffprobe
 
 BASE_DIR = Path(__file__).resolve().parent
 SCRIPT_PATH = BASE_DIR / "video-remove-silence.py"
 UPLOAD_ROOT = BASE_DIR / "_web_uploads"
-MAX_UPLOAD_BYTES = 4 * 1024 * 1024 * 1024  # 4 GB
+
+
+def _max_upload_bytes_from_env() -> int:
+    """Flask MAX_CONTENT_LENGTH; ortam: MAX_UPLOAD_GB veya MAX_UPLOAD_BYTES (öncelik GB)."""
+    raw_gb = os.environ.get("MAX_UPLOAD_GB", "").strip()
+    if raw_gb:
+        try:
+            gb = float(raw_gb.replace(",", "."))
+            if gb > 0:
+                return int(gb * 1024 * 1024 * 1024)
+        except ValueError:
+            pass
+    raw_b = os.environ.get("MAX_UPLOAD_BYTES", "").strip()
+    if raw_b:
+        try:
+            n = int(raw_b)
+            if n > 0:
+                return n
+        except ValueError:
+            pass
+    return 8 * 1024 * 1024 * 1024  # 8 GB varsayılan
+
+
+MAX_UPLOAD_BYTES = _max_upload_bytes_from_env()
 
 ALLOWED_EXT = {".mp4", ".mov", ".mkv", ".webm", ".avi", ".m4v"}
 
@@ -38,6 +131,21 @@ jobs: dict = {}
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_BYTES
+
+
+@app.errorhandler(RequestEntityTooLarge)
+def handle_request_entity_too_large(_e):
+    return jsonify(
+        {
+            "error": (
+                "Dosya boyutu sunucunun izin verdiği üst sınırı aşıyor. "
+                "Yerel çalıştırmada MAX_UPLOAD_GB ortam değişkeni ile sınırı artırabilirsiniz "
+                "(ör. MAX_UPLOAD_GB=32). Önünde nginx, Cloudflare veya başka bir proxy varsa "
+                "oradaki yükleme gövdesi sınırını (client_max_body_size vb.) da yükseltmeniz gerekir."
+            ),
+            "max_upload_bytes": MAX_UPLOAD_BYTES,
+        }
+    ), 413
 
 
 def _safe_stem(name: str) -> str:
@@ -358,7 +466,7 @@ def page_cerez_politikasi():
 
 @app.route("/api/health", methods=["GET"])
 def health():
-    return jsonify({"ok": SCRIPT_PATH.is_file()})
+    return jsonify({"ok": SCRIPT_PATH.is_file(), "max_upload_bytes": MAX_UPLOAD_BYTES})
 
 
 @app.route("/api/process", methods=["POST"])

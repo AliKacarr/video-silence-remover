@@ -1409,7 +1409,8 @@
                   <div class="video-info-name" id="videoCardName"></div>
                   <div class="video-info-meta">
                     <span id="videoCardSize"></span><span class="video-info-dot">·</span><span
-                      id="videoCardDuration">—</span>
+                      id="videoCardDuration">—</span><span class="video-info-dot">·</span><span
+                      id="videoCardEta" title="Video süresi ve dosya boyutuna göre tahmini işlem süresi">—</span>
                   </div>
                 </div>
                 <div class="video-info-actions" id="videoFileActions">
@@ -1631,6 +1632,7 @@
       var videoCardName = document.getElementById("videoCardName");
       var videoCardSize = document.getElementById("videoCardSize");
       var videoCardDuration = document.getElementById("videoCardDuration");
+      var videoCardEta = document.getElementById("videoCardEta");
       var btnChangeVideo = document.getElementById("btnChangeVideo");
       var btnRemoveVideo = document.getElementById("btnRemoveVideo");
       var videoFileActions = document.getElementById("videoFileActions");
@@ -1999,6 +2001,39 @@
         return parts.join(" ");
       }
 
+      /** web_server._estimate_eta_seconds ile aynı formül (sunucu tahminiyle uyumlu). */
+      function estimateEtaSeconds(videoDurationSec, sizeBytes) {
+        if (videoDurationSec == null || !isFinite(videoDurationSec) || videoDurationSec <= 0) {
+          return null;
+        }
+        var d = Number(videoDurationSec);
+        var sizeMb =
+          sizeBytes != null && isFinite(sizeBytes) && sizeBytes > 0 ? sizeBytes / (1024 * 1024) : 0;
+        var raw = d * 0.2 + Math.max(0, sizeMb) * 0.45 + 18.0;
+        var eta = Math.max(28, raw);
+        eta = Math.min(eta, Math.max(d * 0.85 + 120, d * 0.35 + 300));
+        return eta;
+      }
+
+      function updateVideoCardEta() {
+        if (!videoCardEta) return;
+        if (!selectedFile || !videoPreview) {
+          videoCardEta.textContent = "—";
+          return;
+        }
+        var dur = videoPreview.duration;
+        if (!dur || !isFinite(dur) || dur <= 0) {
+          videoCardEta.textContent = "—";
+          return;
+        }
+        var eta = estimateEtaSeconds(dur, selectedFile.size);
+        if (eta == null || !isFinite(eta)) {
+          videoCardEta.textContent = "—";
+          return;
+        }
+        videoCardEta.textContent = "Tahmini işlem: " + formatDurationTurkish(Math.round(eta));
+      }
+
       function pickProgressMessage(serverMessage, fallback) {
         var msg = (serverMessage || "").trim();
         var generic = {
@@ -2235,6 +2270,7 @@
           if (videoCardName) videoCardName.textContent = "";
           if (videoCardSize) videoCardSize.textContent = "";
           if (videoCardDuration) videoCardDuration.textContent = "—";
+          if (videoCardEta) videoCardEta.textContent = "—";
           btnProcess.disabled = true;
           btnProcess.hidden = false;
           lastAppliedAdvancedSnapshot = null;
@@ -2262,6 +2298,7 @@
             if (videoCardDuration) {
               videoCardDuration.textContent = d && isFinite(d) ? formatClock(Math.floor(d)) : "—";
             }
+            updateVideoCardEta();
           };
           videoPreview.src = previewObjectUrl;
           videoPreview.load();
@@ -2276,6 +2313,7 @@
         if (videoCardName) videoCardName.textContent = file.name;
         if (videoCardSize) videoCardSize.textContent = formatSize(file.size);
         if (videoCardDuration) videoCardDuration.textContent = "—";
+        if (videoCardEta) videoCardEta.textContent = "—";
         btnProcess.disabled = false;
         btnProcess.hidden = false;
         syncReprocessButton();
@@ -2470,7 +2508,14 @@
         try {
           var res = await fetch("/api/process", { method: "POST", body: collectFormData() });
           var data = await res.json().catch(function () { return {}; });
-          if (!res.ok) throw new Error(data.error || "Yükleme başarısız.");
+          if (!res.ok) {
+            var msg = data.error || "Yükleme başarısız.";
+            if (res.status === 413 && !data.error) {
+              msg =
+                "Dosya yüklemesi reddedildi (413). Sunucu veya proxy sınırı aşılmış olabilir; yerel için MAX_UPLOAD_GB kullanın.";
+            }
+            throw new Error(msg);
+          }
           var jobId = data.job_id;
           if (!jobId) throw new Error("Sunucu yanıtı geçersiz.");
 
