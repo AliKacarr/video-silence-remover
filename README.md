@@ -1,6 +1,6 @@
 # Video Sessizlik Kaldırıcı
 
-Videolarınızdaki sessiz anları otomatik tespit edip kısaltır. Tarayıcı üzerinden video yükleyebilir, ses değerlerini ayarlayabilir ve işlenmiş çıktıyı indirebilirsiniz.
+Videolarınızdaki sessiz alanları otomatik tespit edip kısaltır. Tarayıcı üzerinden video yükleyebilir, ses değerlerini ayarlayabilir ve işlenmiş çıktıyı indirebilirsiniz.
 
 ## Web arayüzünden kullanım
 
@@ -45,7 +45,7 @@ python video-remove-silence.py "ornek.mp4" --threshold-level -35 --threshold-dur
 
 ## Gereksinimler
 
-- **Python** 3.1+
+- **Python** 3.10+
 - **Flask** 3.1+
 - **FFmpeg** 8.1+
 
