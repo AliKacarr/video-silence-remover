@@ -2,8 +2,6 @@
 
 Videolarınızdaki sessiz anları otomatik tespit edip kısaltır. Tarayıcı üzerinden video yükleyebilir, ses değerlerini ayarlayabilir ve işlenmiş çıktıyı indirebilirsiniz.
 
-# Kullanım akışı
-
 ## Web arayüzünden kullanım
 
 1. Uygulamayı başlatın:
@@ -25,13 +23,19 @@ Windows'ta isterseniz `start.bat` kısayolu ile tek tıkla başlatabilirsiniz.
 
 ## Komut satırından kullanım
 
-Temel kullanım:
+Temel kullanım (aynı klasördeki dosya):
 
 ```bash
 python video-remove-silence.py "ornek.mp4"
 ```
 
-Örnek (eşik ayarları ile):
+Tam yol ile kullanım (Windows):
+
+```bash
+python video-remove-silence.py "C:\Users\Ali\videos\ornek.mp4"
+```
+
+Ses eşik ayarları ile:
 
 ```bash
 python video-remove-silence.py "ornek.mp4" --threshold-level -35 --threshold-duration 0.6
@@ -45,26 +49,18 @@ python video-remove-silence.py "ornek.mp4" --threshold-level -35 --threshold-dur
 - **Flask** 3.1+
 - **FFmpeg** 8.1+
 
-Not: İlk çalıştırmada bilgisayarınızda Flask kurulu değilse otomatik kurulmaya çalışılır.
+## Flask Yapılandırması
 
-## FFmpeg kullanımı
+Flask kuruluysa uygulama doğrudan çalışır. Kurulu değilse gerekli kurulum otomatik olarak başlatılır.
 
-FFmpeg arama sırası iki adımdır:
+## FFmpeg Yapılandırması
 
-1. Önce sistemde kurulu FFmpeg (`PATH`) kullanılır.
-2. Cihazda FFmpeg yoksa proje içindeki `ffmpeg` klasörü devreye girer.
-
-Proje klasöründe kullanılan ikililer:
-
-- `ffmpeg/bin/ffmpeg(.exe)`
-- `ffmpeg/bin/ffprobe(.exe)`
-
-Bu sayede kullanıcının cihazında FFmpeg varsa doğrudan onu kullanır; yoksa depodaki FFmpeg 8.1 dosyalarıyla devam eder.
+Sistemde FFmpeg varsa cihazdaki kurulum kullanılır. FFmpeg yoksa proje içindeki FFmpeg 8.1 devreye girer.
 
 ## Sorun giderme
 
 - **Yükleme limiti hatası (413)**: `MAX_UPLOAD_GB` ortam değişkenini artırın (ör. `MAX_UPLOAD_GB=32`).
-- **FFmpeg bulunamadı**: `ffmpeg/bin` altındaki dosyaların mevcut olduğunu doğrulayın veya sistem PATH'inize FFmpeg ekleyin.
+- **FFmpeg bulunamadı**: Cihazınıza güncel FFmpeg indirip ortam değişkenlerine (PATH) ekleyin.
 - **Uzun işlem süresi**: Büyük videolarda işlem süresi uzayabilir; işlem durumu arayüzden takip edilebilir.
 
 ## Proje yapısı
