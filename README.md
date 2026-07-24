@@ -2,6 +2,18 @@
 
 Videolarınızdaki sessiz alanları otomatik tespit edip kısaltır. Tarayıcı üzerinden video yükleyebilir, ses değerlerini ayarlayabilir ve işlenmiş çıktıyı indirebilirsiniz.
 
+## Ekran Görüntüleri
+
+| Video yükleme sayfası | Video işle |
+|:---------:|:--------------:|
+| <img src="images/Video yükleme sayfası.png" width="250"> | <img src="images/Video işle.png" width="250"> |
+
+| Video işleniyor | Videoyu indir |
+|:---------:|:--------------:|
+| <img src="images/Video işleniyor.png" width="250"> | <img src="images/Videoyu indir.png" width="250"> |
+
+---
+
 ## Web arayüzünden kullanım
 
 1. Uygulamayı başlatın:
